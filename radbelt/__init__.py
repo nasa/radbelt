@@ -5,7 +5,7 @@ from . import core
 from .extern.ccmc import igrf
 
 with resources.path(igrf, 'dgrf1945.dat') as p:
-    IGRF_DATA_PATH = str(p.parent.absolute())
+    IGRF_DATA_PATH = str(p.parent.resolve())
 
 
 def radbelt(lon, lat, height, year):
