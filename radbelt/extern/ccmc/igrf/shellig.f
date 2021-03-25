@@ -433,7 +433,7 @@ C		  POINTING IN THE TANGENTIAL PLANE TO THE NORTH, EAST
 C		  AND DOWNWARD.   
 C-----------------------------------------------------------------------
       DIMENSION 	V(3),B(3)   
-      CHARACTER*12 	NAME
+      CHARACTER*14 	NAME
       COMMON 		XI(3),H(144)
       COMMON/MODEL/	NAME,NMAX,TIME,G(144)  
       COMMON/GENER/	UMR,ERA,AQUAD,BQUAD
@@ -530,24 +530,26 @@ C  -corrected for 2000 update - dkb- 5/31/2000
 C  ### updated to IGRF-2000 version -dkb- 5/31/2000
 C  ### updated to IGRF-2005 version -dkb- 3/24/2000
 C-----------------------------------------------------------------------
-	CHARACTER*12	FILMOD, FIL1, FIL2           
+	CHARACTER*14	FILMOD, FIL1, FIL2           
 C ### FILMOD, DTEMOD arrays +1
-	DIMENSION	GH1(144),GH2(120),GHA(144),FILMOD(14),DTEMOD(14)
+	DIMENSION	GH1(144),GH2(120),GHA(144),FILMOD(17),DTEMOD(17)
 	DOUBLE PRECISION X,F0,F 
 	COMMON/MODEL/	FIL1,NMAX,TIME,GH1
 	COMMON/GENER/	UMR,ERAD,AQUAD,BQUAD
 C ### changed to conform with IGRF 45-95, also FILMOD, DTEMOD arrays +1
-	DATA		FILMOD /'dgrf45.dat', 'dgrf50.dat',            
-     1			'dgrf55.dat', 'dgrf60.dat', 'dgrf65.dat',      
-     2			'dgrf70.dat', 'dgrf75.dat', 'dgrf80.dat',      
-     3			'dgrf85.dat', 'dgrf90.dat', 'dgrf95.dat',
-     4          'dgrf00.dat','igrf05.dat','igrf05s.dat'/
+	DATA		FILMOD /'dgrf1945.dat', 'dgrf1950.dat',            
+     1			'dgrf1955.dat', 'dgrf1960.dat', 'dgrf1965.dat',      
+     2			'dgrf1970.dat', 'dgrf1975.dat', 'dgrf1980.dat',      
+     3			'dgrf1985.dat', 'dgrf1990.dat', 'dgrf1995.dat',
+     4			'dgrf2000.dat', 'dgrf2005.dat', 'dgrf2010.dat',
+     5			'dgrf2015.dat', 'igrf2020.dat', 'igrf2020s.dat'/
 	DATA	DTEMOD / 1945., 1950., 1955., 1960., 1965., 1970.,
-     1       1975., 1980., 1985., 1990., 1995., 2000.,2005.,2010./      
+     1       1975., 1980., 1985., 1990., 1995., 2000., 2005., 2010.,
+     2       2015., 2020., 2025./      
 C
 C ### numye is number of 5-year priods represented by IGRF
 C
-	NUMYE=13
+	NUMYE=16
 C
 C  IS=0 FOR SCHMIDT NORMALIZATION   IS=1 GAUSS NORMALIZATION
 C  IU  IS INPUT UNIT NUMBER FOR IGRF COEFFICIENT SETS
