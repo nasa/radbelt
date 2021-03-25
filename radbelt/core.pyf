@@ -1,0 +1,18 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module core ! in 
+    interface  ! in :core
+        subroutine radbelt(lon,lat,height,year,xl,bbx) ! in :core:src/core.f
+            real intent(in) :: lon
+            real intent(in) :: lat
+            real intent(in) :: height
+            real intent(in) :: year
+            real intent(out) :: xl
+            real intent(out) :: bbx
+        end subroutine radbelt
+    end interface 
+end python module core
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
