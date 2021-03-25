@@ -4,7 +4,7 @@ import os
 
 from . import core
 from .extern.ccmc import igrf as igrf_data
-from .extern.ccmc import radbelt as aep8_data
+from .extern.ccmc import aep8 as aep8_data
 
 with resources.path(igrf_data, 'dgrf1945.dat') as p:
     IGRF_DATA_PATH = str(p.parent.resolve())

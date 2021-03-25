@@ -9,7 +9,7 @@ setup(
                 'radbelt/core.pyf',
                 'radbelt/core.f',
                 'radbelt/extern/ccmc/igrf/shellig.f',
-                'radbelt/extern/ccmc/radbelt/trmfun.f'
+                'radbelt/extern/ccmc/aep8/trmfun.f'
             ]
         )
     ],
@@ -17,6 +17,6 @@ setup(
     packages=find_packages(),
     package_data={
         'radbelt.extern.ccmc.igrf': ['*.dat'],
-        'radbelt.extern.ccmc.radbelt': ['*.asc']
+        'radbelt.extern.ccmc.aep8': ['*.asc']
     }
 )
