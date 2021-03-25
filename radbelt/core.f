@@ -4,7 +4,6 @@ C https://ccmc.gsfc.nasa.gov/pub/modelweb/geomagnetic/igrf/fortran_code/bilcal.f
         SUBROUTINE RADBELT(LON, LAT, HEIGHT, YEAR, XL, BBX)
             REAL        LON, LAT, HEIGHT, YEAR, XL, BBX
             LOGICAL     VAL
-            COMMON/GENER/	UMR,ERA,AQUAD,BQUAD
 
             CALL INITIZE
             CALL FELDCOF(YEAR, DIMO)
