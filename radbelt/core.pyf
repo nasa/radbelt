@@ -3,14 +3,14 @@
 
 python module core ! in 
     interface  ! in :core
-        subroutine radbelt(lon,lat,height,year,xl,bbx) ! in :core:src/core.f
+        subroutine igrf(lon,lat,height,year,xl,bbx) ! in :core:src/core.f
             real intent(in) :: lon
             real intent(in) :: lat
             real intent(in) :: height
             real intent(in) :: year
             real intent(out) :: xl
             real intent(out) :: bbx
-        end subroutine radbelt
+        end subroutine igrf
     end interface 
 end python module core
 

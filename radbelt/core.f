@@ -1,7 +1,7 @@
 C Adapted from
 C https://ccmc.gsfc.nasa.gov/pub/modelweb/geomagnetic/igrf/fortran_code/bilcal.for
 
-        SUBROUTINE RADBELT(LON, LAT, HEIGHT, YEAR, XL, BBX)
+        SUBROUTINE IGRF(LON, LAT, HEIGHT, YEAR, XL, BBX)
             REAL        LON, LAT, HEIGHT, YEAR, XL, BBX
             LOGICAL     VAL
 
