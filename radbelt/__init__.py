@@ -1,3 +1,4 @@
+from contextlib import contextmanager
 from importlib import resources
 import os
 
@@ -8,10 +9,16 @@ with resources.path(igrf, 'dgrf1945.dat') as p:
     IGRF_DATA_PATH = str(p.parent.resolve())
 
 
-def radbelt(lon, lat, height, year):
+@contextmanager
+def working_directory(path):
     old_dir = os.getcwd()
-    os.chdir(IGRF_DATA_PATH)
+    os.chdir(path)
     try:
-        return core.igrf(lon, lat, height, year)
+        yield
     finally:
         os.chdir(old_dir)
+
+
+@working_directory(IGRF_DATA_PATH)
+def radbelt(lon, lat, height, year):
+    return core.igrf(lon, lat, height, year)
