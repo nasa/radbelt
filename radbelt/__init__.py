@@ -3,10 +3,12 @@ from importlib import resources
 import os
 
 from . import core
-from .extern.ccmc import igrf
+from .extern.ccmc import igrf as igrf_data
 
-with resources.path(igrf, 'dgrf1945.dat') as p:
+with resources.path(igrf_data, 'dgrf1945.dat') as p:
     IGRF_DATA_PATH = str(p.parent.resolve())
+
+del igrf_data
 
 
 @contextmanager
@@ -20,5 +22,5 @@ def working_directory(path):
 
 
 @working_directory(IGRF_DATA_PATH)
-def radbelt(lon, lat, height, year):
+def igrf(lon, lat, height, year):
     return core.igrf(lon, lat, height, year)
