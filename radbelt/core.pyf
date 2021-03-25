@@ -11,6 +11,13 @@ python module core ! in
             real intent(out) :: xl
             real intent(out) :: bbx
         end subroutine igrf
+        subroutine aep8(e,l,bb0,imname,flux) ! in :core:radbelt/core.f
+            real intent(in) :: e
+            real intent(in) :: l
+            real intent(in) :: bb0
+            integer intent(in) :: imname
+            real intent(out) :: flux
+        end subroutine aep8
     end interface 
 end python module core
 
