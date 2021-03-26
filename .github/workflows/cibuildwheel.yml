@@ -1,0 +1,59 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  release:
+    types:
+      - published
+
+jobs:
+
+  source:
+    name: Build source package
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: docker://python
+        with:
+          args: 'sh -c "pip install build && python -m build --sdist"'
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: dist/*
+
+  wheels:
+    name: Build binary packages
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build wheels
+        uses: joerick/cibuildwheel@v1.9.0
+        env:
+          CIBW_ENVIRONMENT_MACOS: F77=gfortran-9 F90=gfortran-9
+          CIBW_SKIP: pp*-macosx*
+
+      - uses: actions/upload-artifact@v2
+        with:
+          path: wheelhouse/*
+
+  publish:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    needs: [source, wheels]
+    if: github.event_name == 'release'
+
+    steps:
+      - uses: actions/download-artifact@v2
+
+      - uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
