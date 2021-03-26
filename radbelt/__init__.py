@@ -1,36 +1,20 @@
-from contextlib import contextmanager
 from importlib import resources
-import os
 
-from . import core
-from .extern.ccmc import igrf as igrf_data
-from .extern.ccmc import aep8 as aep8_data
+import numpy as np
 
-with resources.path(igrf_data, 'dgrf1945.dat') as p:
-    IGRF_DATA_PATH = str(p.parent.resolve())
-
-with resources.path(aep8_data, 'ae8min.asc') as p:
-    AEP8_DATA_PATH = str(p.parent.resolve())
-
-del igrf_data, aep8_data
-
-
-@contextmanager
-def working_directory(path):
-    old_dir = os.getcwd()
-    os.chdir(path)
-    try:
-        yield
-    finally:
-        os.chdir(old_dir)
+from .core import igrf as _igrf, aep8 as _aep8
+from .paths import IGRF_DATA_PATH, AEP8_DATA_PATH
+from .util import working_directory
 
 
 @working_directory(IGRF_DATA_PATH)
+@np.vectorize
 def igrf(lon, lat, height, year):
-    return core.igrf(lon, lat, height, year)
+    return _igrf(lon, lat, height, year)
 
 
 @working_directory(AEP8_DATA_PATH)
+@np.vectorize
 def aep8(energy, lvalue, bb0, particle, solar):
     if particle not in ('e', 'p'):
         raise ValueError('particle must be "e" or "p"')
@@ -44,4 +28,4 @@ def aep8(energy, lvalue, bb0, particle, solar):
         ('p', 'max'): 4
     }[(particle, solar)]
 
-    return core.aep8(energy, lvalue, bb0, modelnum)
+    return _aep8(energy, lvalue, bb0, modelnum)
