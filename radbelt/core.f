@@ -43,4 +43,5 @@ C https://ccmc.gsfc.nasa.gov/pub/modelweb/radiation_belt/radbelt/fortran_code/ra
 
             EE(1) = E
             CALL TRARA1(IHEAD,MAP,L,BB0,E,FLUX,1)
+            FLUX = 10.**FLUX
         END
