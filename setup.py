@@ -23,16 +23,16 @@ setup(
             [
                 'radbelt/core.pyf',
                 'radbelt/core.f',
-                'radbelt/extern/ccmc/igrf/shellig.f',
-                'radbelt/extern/ccmc/aep8/trmfun.f'
+                'radbelt/extern/igrf/shellig.f',
+                'radbelt/extern/aep8/trmfun.f'
             ]
         )
     ],
     install_requires=['astropy', 'numpy'],
     packages=find_packages(),
     package_data={
-        'radbelt.extern.ccmc.igrf': ['*.dat'],
-        'radbelt.extern.ccmc.aep8': ['*.asc']
+        'radbelt.extern.igrf': ['*.dat'],
+        'radbelt.extern.aep8': ['*.asc']
     },
     zip_safe=False
 )
