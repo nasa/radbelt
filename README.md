@@ -1,4 +1,4 @@
-# radbelt
+# radbelt: An Astropy-friendly wrapper for the AE-8/AP-8 Van Allen belt model
 
 This is small Python library to model the fluxes of charged particles trapped
 in the Van Allen belt. It provides a fast, simple, and convenient Python
