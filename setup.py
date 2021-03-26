@@ -17,7 +17,7 @@ setup(
         "Topic :: Scientific/Engineering :: Astronomy"
     ],
     license='NOSA',
-    python_requires='>=3.8',
+    python_requires='>=3.7',
     ext_modules=[
         Extension('radbelt.core',
             [
