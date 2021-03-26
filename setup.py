@@ -13,7 +13,7 @@ setup(
             ]
         )
     ],
-    install_requires=['numpy'],
+    install_requires=['astropy', 'numpy'],
     packages=find_packages(),
     package_data={
         'radbelt.extern.ccmc.igrf': ['*.dat'],

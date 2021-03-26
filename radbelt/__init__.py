@@ -1,3 +1,4 @@
+from astropy import units as u
 from importlib import resources
 
 import numpy as np
@@ -29,3 +30,46 @@ def aep8(energy, lvalue, bb0, particle, solar):
     }[(particle, solar)]
 
     return _aep8(energy, lvalue, bb0, modelnum)
+
+
+def get_flux(coords, time, energy, particle, solar):
+    """Calculate the flux of trapped particles at a specific location and time.
+
+    Parameters
+    ----------
+    coords : astropy.coordinates.EarthLocation
+        The position relative to the Earth.
+    time : astropy.time.Time
+        The time (needed to account for drift of the Earth's magnetic field).
+    energy : astropy.units.Quantity
+        The minimum energy.
+    particle : {'e', 'p'}
+        The particle species: 'e' for electrons, 'p' for protons.
+    solar : {'min', 'max'}
+        The solar activity: solar minimum or solar maximum.
+
+    Returns
+    -------
+    flux : astropy.units.Quantity
+        The flux of particles above the given energy, in units of cm^-2 s^-1.
+
+    Example
+    -------
+
+    >>> from radbelt import get_flux
+    >>> from astropy import units as u
+    >>> from astropy.coordinates import EarthLocation
+    >>> from astropy.time import Time
+    >>> coords = EarthLocation(-45 * u.deg, -30 * u.deg, 500 * u.km)
+    >>> time = Time('2021-03-01')
+    >>> energy = 20 * u.MeV
+    >>> get_flux(coords, time, energy, 'p', 'max')
+    <Quantity 2642.50268555 1 / (cm2 s)>
+
+    """
+    lvalue, bb0 = igrf(coords.geodetic.lon.deg,
+                       coords.geodetic.lat.deg,
+                       coords.geodetic.height.to_value(u.km),
+                       time.utc.decimalyear)
+    flux = aep8(energy.to_value(u.MeV), lvalue, bb0, particle, solar)
+    return flux * u.cm**-2 * u.s**-1
