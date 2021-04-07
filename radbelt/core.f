@@ -1,3 +1,11 @@
+C
+C Copyright © 2021 United States Government as represented by the Administrator
+C of the National Aeronautics and Space Administration. No copyright is claimed
+C in the United States under Title 17, U.S. Code. All Other Rights Reserved.
+C
+C SPDX-License-Identifier: NASA-1.3
+C
+
 C Adapted from
 C https://ccmc.gsfc.nasa.gov/pub/modelweb/geomagnetic/igrf/fortran_code/bilcal.for
 
