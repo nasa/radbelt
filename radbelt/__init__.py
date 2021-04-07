@@ -7,8 +7,6 @@
 #
 
 from astropy import units as u
-from importlib import resources
-
 import numpy as np
 
 from .core import igrf as _igrf, aep8 as _aep8
