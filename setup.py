@@ -6,6 +6,7 @@ setup(
     description='Astropy-friendly wrapper for the AE-8/AP-8 Van Allen belt model',
     author='Leo Singer',
     author_email='leo.p.singer@nasa.gov',
+    version='0.1.0',
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Science/Research",
