@@ -9,12 +9,11 @@ for easy conversion of coordinate systems, time scales, and units. With this
 package, it is easy and fast to determine the flux of particles above any given
 energy, at any position, at any time.
 
-[International Geomagnetic Reference Field (IGRF)]: https://www.ngdc.noaa.gov/IAGA/vmod/igrf.html
-[Astropy]: https://www.astropy.org
-
 ## Acknowledging radbelt
 
-This package is wraps the following Fortran codes:
+This package is wraps the following Fortran codes, which have been retrieved
+from NASA Goddard Space Flight Center's (GSFC) [Community Coordinated Modeling
+Center (CCMC)]:
 
 - https://ccmc.gsfc.nasa.gov/models/modelinfo.php?model=IGRF
 - https://ccmc.gsfc.nasa.gov/models/modelinfo.php?model=AE-8/AP-8%20RADBELT
@@ -44,3 +43,12 @@ following articles:
 >>> get_flux(coords, time, energy, 'p', 'max')
 <Quantity 2642.50268555 1 / (cm2 s)>
 ```
+
+## Known issues
+
+The CCMC IGRF code has spatially varying errors of a few percent, which will
+result in a striped pattern in the resulting particle flux.
+
+[International Geomagnetic Reference Field (IGRF)]: https://www.ngdc.noaa.gov/IAGA/vmod/igrf.html
+[Astropy]: https://www.astropy.org
+[Community Coordinated Modeling Center (CCMC)]: https://ccmc.gsfc.nasa.gov/
