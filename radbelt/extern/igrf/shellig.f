@@ -1,7 +1,7 @@
 C SHELLIG.FOR, Version 2.0, January 1992
 C
 C 11/01/91-DKB- SHELLG: lowest starting point for B0 search is 2  
-C  1/27/92-DKB- Adopted to IGRF-91 coeffcients model
+C  1/27/92-DKB- Adopted to IGRF-91 coefficients model
 C  2/05/92-DKB- Reduce variable-names: INTER(P)SHC,EXTRA(P)SHC,INITI(ALI)ZE
 C  8/08/95-DKB- Updated to IGRF-45-95; new coeff. DGRF90, IGRF95, IGRF95S
 C  5/31/00-DKB- Updated to IGRF-45-00; new coeff.: IGRF00, IGRF00s
@@ -579,7 +579,7 @@ C-- DETERMINE IGRF COEFFICIENTS FOR YEAR
 	  CALL EXTRASHC (YEAR, DTE1, NMAX1, GH1, NMAX2,     
      1		GH2, NMAX, GHA)                                    
 	ENDIF 
-C-- DETERMINE MAGNETIC DIPOL MOMENT AND COEFFIECIENTS G
+C-- DETERMINE MAGNETIC DIPOL MOMENT AND COEFFICIENTS G
 	F0=0.D0
 	DO 1234 J=1,3
 	   F = GHA(J) * 1.D-5
