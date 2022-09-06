@@ -1,0 +1,11 @@
+on:
+  push:
+    branches:
+    tags:
+      - v*
+
+jobs:
+  publish:
+    uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish.yml@v1
+    secrets:
+      pypi_token: ${{ secrets.pypi_token }}
