@@ -30,7 +30,7 @@ setup(
             ]
         )
     ],
-    install_requires=['astropy', 'numpy>=1.21.3'],
+    install_requires=['astropy', 'numpy'],
     packages=find_packages(),
     package_data={
         'radbelt.extern.igrf': ['*.dat'],
