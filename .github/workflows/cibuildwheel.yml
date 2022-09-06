@@ -20,7 +20,7 @@ jobs:
         with:
           args: 'sh -c "pip install build && python -m build --sdist"'
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           path: dist/*
 
@@ -40,7 +40,7 @@ jobs:
           CIBW_ENVIRONMENT_MACOS: F77=gfortran-9 F90=gfortran-9
           CIBW_SKIP: pp*-macosx*
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           path: wheelhouse/*
 
