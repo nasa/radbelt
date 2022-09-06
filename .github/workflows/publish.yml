@@ -2,9 +2,9 @@ on:
   push:
     branches:
       - main
-    pull_request:
     tags:
       - v*
+  pull_request:
 
 env:
   CIBW_ENVIRONMENT_MACOS: F77=gfortran-9 F90=gfortran-9
