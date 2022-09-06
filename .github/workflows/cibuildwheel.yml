@@ -52,6 +52,7 @@ jobs:
         env:
           CIBW_ARCHS_LINUX: auto aarch64
           CIBW_ARCHS_WINDOWS: AMD64
+          CIBW_ARCHS_MACOS: auto arm64
           CIBW_ENVIRONMENT_MACOS: FC=gfortran-11
           # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
           # Skip PyPy wheels
