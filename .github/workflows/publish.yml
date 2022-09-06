@@ -11,3 +11,9 @@ jobs:
     uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish.yml@v1
     secrets:
       pypi_token: ${{ secrets.PYPI_API_TOKEN }}
+    targets:
+      - cp*-macosx_x86_64
+      - cp*-macosx_arm64
+      - cp*-manylinux*_x86_64
+      - cp*-manylinux*_aarch64
+      - windows
