@@ -11,3 +11,5 @@ jobs:
     uses: OpenAstronomy/github-actions-workflows/.github/workflows/publish.yml@v1
     secrets:
       pypi_token: ${{ secrets.PYPI_API_TOKEN }}
+    env:
+      CIBW_ENVIRONMENT_MACOS: F77=gfortran-9 F90=gfortran-9
