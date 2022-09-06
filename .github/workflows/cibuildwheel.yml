@@ -38,6 +38,7 @@ jobs:
         uses: joerick/cibuildwheel@v1.9.0
         env:
           CIBW_ENVIRONMENT_MACOS: F77=gfortran-9 F90=gfortran-9
+          CIBW_SKIP: pp*-macosx*
 
       - uses: actions/upload-artifact@v3
         with:
