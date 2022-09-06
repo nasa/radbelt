@@ -40,7 +40,6 @@ jobs:
         uses: pypa/cibuildwheel@v1.9.0
         env:
           CIBW_ENVIRONMENT_MACOS: F77=gfortran-9 F90=gfortran-9
-          CIBW_SKIP: pp*
 
       - uses: actions/upload-artifact@v3
         with:
