@@ -41,7 +41,8 @@ jobs:
         env:
           CIBW_ENVIRONMENT_MACOS: F77=gfortran-9 F90=gfortran-9
           # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
-          CIBW_SKIP: '*musllinux*'
+          # Skip pp37-win_* and pp37-macosx_*, because there were never Numpy wheels built for them
+          CIBW_SKIP: '*musllinux* pp37-win_* pp37-macosx_*'
 
       - uses: actions/upload-artifact@v3
         with:
