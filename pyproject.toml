@@ -27,6 +27,9 @@ license = { text = "NOSA" }
 requires-python = ">=3.7"
 dependencies = ["astropy", "numpy"]
 
+[project.urls]
+source = "https://github.com/nasa/radbelt"
+
 [tool.setuptools.packages.find]
 include = ["radbelt"]
 
