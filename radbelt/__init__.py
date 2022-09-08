@@ -9,6 +9,7 @@
 from astropy import units as u
 import numpy as np
 
+from ._version import version as __version__
 from .core import igrf as _igrf, aep8 as _aep8
 from .paths import IGRF_DATA_PATH, AEP8_DATA_PATH
 from .util import working_directory
