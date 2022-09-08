@@ -1,9 +1,35 @@
 [build-system]
-
-requires = ["setuptools",
+build-backend = 'setuptools.build_meta'
+requires = ["setuptools>=61",
             "wheel",
             # see https://github.com/scipy/oldest-supported-numpy/issues/62
             "numpy==1.19.0; python_version<='3.8' and platform_system=='Windows' and platform_python_implementation != 'PyPy'",
             "oldest-supported-numpy; python_version>'3.8' or platform_system!='Windows' or platform_python_implementation == 'PyPy'"]
 
-build-backend = 'setuptools.build_meta'
+[project]
+name = "radbelt"
+description = "Astropy-friendly wrapper for the AE-8/AP-8 Van Allen belt model"
+readme = "README.md"
+authors = [ { name = "Leo Singer", email = "leo.p.singer@nasa.gov" } ]
+version = "0.1.0"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering :: Astronomy"
+]
+license = { text = "NOSA" }
+requires-python = ">=3.7"
+dependencies = ["astropy", "numpy"]
+
+[tool.setuptools.packages.find]
+include = ["radbelt"]
+
+[tool.setuptools.package-data]
+"radbelt.extern.igrf" = ["*.dat"]
+"radbelt.extern.aep8" = ["*.asc"]
