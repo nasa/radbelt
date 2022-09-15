@@ -46,3 +46,7 @@ find = {}
 
 [tool.setuptools_scm]
 write_to = "radbelt/_version.py"
+
+[tool.cibuildwheel]
+test-extras = ["test"]
+test-command = "pytest --pyargs radbelt --doctest-plus"
