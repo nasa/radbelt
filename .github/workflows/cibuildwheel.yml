@@ -39,7 +39,7 @@ jobs:
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.11.1
         env:
-          CIBW_ENVIRONMENT_MACOS: F77=gfortran-9 F90=gfortran-9
+          CIBW_ENVIRONMENT_MACOS: F77=gfortran-11 F90=gfortran-11
           # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
           # Skip pp37-win_* and pp37-macosx_*, because there were never Numpy wheels built for them
           CIBW_SKIP: '*musllinux* pp37-win_* pp37-macosx_*'
