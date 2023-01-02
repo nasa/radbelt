@@ -42,7 +42,9 @@ jobs:
           CIBW_ENVIRONMENT_MACOS: F77=gfortran-11 F90=gfortran-11
           # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
           # Skip pp37-win_* and pp37-macosx_*, because there were never Numpy wheels built for them
-          CIBW_SKIP: '*musllinux* pp37-win_* pp37-macosx_*'
+          # Skip pp39-manylinux*, because they fail with:
+          #  build/src.linux-x86_64-3.9/radbelt/coremodule.c:399:23: error: initializer element is not computable at load time
+          CIBW_SKIP: '*musllinux* pp37-win_* pp37-macosx_* pp39-manylinux*'
 
       - uses: actions/upload-artifact@v3
         with:
