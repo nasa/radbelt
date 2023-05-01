@@ -59,13 +59,10 @@ jobs:
   publish:
     name: Publish to PyPI
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     needs: [source, wheels]
     if: github.event_name == 'release'
-
     steps:
       - uses: actions/download-artifact@v3
-
       - uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_API_TOKEN }}
