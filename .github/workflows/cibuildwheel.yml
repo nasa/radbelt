@@ -65,4 +65,6 @@ jobs:
     if: github.event_name == 'release'
     steps:
       - uses: actions/download-artifact@v3
+        with:
+          path: dist
       - uses: pypa/gh-action-pypi-publish@release/v1
