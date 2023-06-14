@@ -32,7 +32,7 @@ dynamic = [ "version" ]
 source = "https://github.com/nasa/radbelt"
 
 [tool.setuptools.packages.find]
-include = ["radbelt"]
+include = ["radbelt.*"]
 
 [tool.setuptools.package-data]
 "radbelt.extern.igrf" = ["*.dat"]
