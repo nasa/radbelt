@@ -71,7 +71,7 @@ def get_flux(coords, time, energy, particle, solar):
     >>> time = Time('2021-03-01')
     >>> energy = 20 * u.MeV
     >>> get_flux(coords, time, energy, 'p', 'max')  # doctest: +FLOAT_CMP
-    <Quantity 2642.50268555 1 / (cm2 s)>
+    <Quantity 2642.50268555 1 / (s cm2)>
 
     """
     lvalue, bb0 = igrf(coords.geodetic.lon.deg,
