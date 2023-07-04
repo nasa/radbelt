@@ -30,6 +30,9 @@ dynamic = [ "version" ]
 [project.urls]
 source = "https://github.com/nasa/radbelt"
 
+[project.optional-dependencies]
+test = ["pytest-doctestplus"]
+
 [tool.setuptools.packages]
 find = {}
 
