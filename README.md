@@ -46,8 +46,13 @@ following articles:
 
 ## Known issues
 
-The CCMC IGRF code has spatially varying errors of a few percent, which will
-result in a striped pattern in the resulting particle flux.
+* The CCMC IGRF code has spatially varying errors of a few percent, which will
+  result in a striped pattern in the resulting particle flux.
+* This package does not support Windows yet. If you are a Windows developer,
+  then please help us out by contributing a pull request! Meanwhile, if you
+  need to use this package on Windows, then we recommend using Python under
+  Linux within Windows Subsystem for Linux (WSL), Docker, or a virtual machine.
+  See https://github.com/nasa/radbelt/issues/47.
 
 [International Geomagnetic Reference Field (IGRF)]: https://www.ngdc.noaa.gov/IAGA/vmod/igrf.html
 [Astropy]: https://www.astropy.org
