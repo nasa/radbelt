@@ -3,9 +3,7 @@ build-backend = 'setuptools.build_meta'
 requires = ["setuptools>=61",
             "setuptools_scm[toml]>=6.2",
             "wheel",
-            # see https://github.com/scipy/oldest-supported-numpy/issues/62
-            "numpy==1.19.0; python_version<='3.8' and platform_system=='Windows' and platform_python_implementation != 'PyPy'",
-            "oldest-supported-numpy; python_version>'3.8' or platform_system!='Windows' or platform_python_implementation == 'PyPy'"]
+            "numpy==1.25.1"]
 
 [project]
 name = "radbelt"
@@ -28,7 +26,7 @@ classifiers = [
 ]
 license = { text = "NOSA" }
 requires-python = ">=3.9"
-dependencies = ["astropy", "numpy"]
+dependencies = ["astropy", "numpy>=1.19"]
 dynamic = [ "version" ]
 
 [project.urls]
