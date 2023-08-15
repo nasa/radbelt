@@ -8,7 +8,6 @@ on:
       - published
 
 jobs:
-
   source:
     name: Build source package
     runs-on: ubuntu-latest
@@ -73,7 +72,7 @@ jobs:
           # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
           # Skip PyPy wheels
           # Skip 32-bit Intel wheels
-          CIBW_SKIP: '*musllinux* pp* *_i686'
+          CIBW_SKIP: "*musllinux* pp* *_i686"
 
       - uses: actions/upload-artifact@v3
         with:
