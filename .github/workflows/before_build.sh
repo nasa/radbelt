@@ -1,4 +1,7 @@
 BUILDING_ARCH=$(echo $CIBW_BUILD | cut -d '-' -f -2)
+echo "BUILD AND ARCH"
+echo $CIBW_BUILD
+echo $BUILDING_ARCH
 if [ "$BUILDING_ARCH" == "x86_64" ]; then
     export CIBW_ENVIRONMENT_MACOS="F77=gfortran-11 F90=gfortran-11"
     echo $CIBW_ENVIRONMENT_MACOS
