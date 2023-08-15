@@ -43,7 +43,7 @@ jobs:
         if: matrix.os == 'macos-latest'
         run: |
           echo ${GITHUB_WORKSPACE}
-          CIBW_BEFORE_ALL_MACOS="brew install gfortran && brew unlink gfortran && brew link gfortran && chmod +x "${GITHUB_WORKSPACE}/.github/workflows/before_build.sh" && ./${GITHUB_WORKSPACE}.github/workflows/before_build.sh && echo $CIBW_ENVIRONMENT_MACOS"
+          CIBW_BEFORE_ALL_MACOS="brew install gfortran && brew unlink gfortran && brew link gfortran && chmod +x "${GITHUB_WORKSPACE}/.github/workflows/before_build.sh" && bash "${GITHUB_WORKSPACE}/.github/workflows/before_build.sh" && echo $CIBW_ENVIRONMENT_MACOS"
           export SDKROOT=$(xcrun -sdk macosx --show-sdk-path) 
           export CIBW_ENVIRONMENT_MACOS="FC=$FC_ARM64 F90=$FC_ARM64 F77=$FC_ARM64 LDFLAGS=\" -arch arm64 $FC_ARM64_LDFLAGS\" CFLAGS=\" -arch arm64\" CXXFLAGS=\" -arch arm64\" CPPFLAGS=\" -arch arm64\" _PYTHON_HOST_PLATFORM=macosx-11.0-arm64 ARCHFLAGS=\" -arch arm64\" FCFLAGS=\" -arch arm64\" CROSS_COMPILING=1 host_alias=aarch64-apple-darwin20.0.0  MACOSX_DEPLOYMENT_TARGET=11.0 SDKROOT=$SDKROOT"
           echo $CIBW_ENVIRONMENT_MACOS
