@@ -23,12 +23,12 @@ jobs:
         with:
           path: dist/*
 
-  wheels:
-    name: Build binary packages
+  linux-wheels:
+    name: Build binary packages for Linux
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v3
@@ -39,23 +39,73 @@ jobs:
         with:
           platforms: arm64
 
-      - name: Setup gfortran for macOS x86/arm64
-        if: matrix.os == 'macos-latest'
-        run: |
-          echo ${GITHUB_WORKSPACE}
-          CIBW_BEFORE_ALL_MACOS="brew install gfortran && brew unlink gfortran && brew link gfortran && chmod +x "${GITHUB_WORKSPACE}/.github/workflows/before_build.sh" && bash "${GITHUB_WORKSPACE}/.github/workflows/before_build.sh" && echo $CIBW_ENVIRONMENT_MACOS"
-          echo $CIBW_BEFORE_ALL_MACOS
-          echo "CIBW_BEFORE_ALL_MACOS=$CIBW_BEFORE_ALL_MACOS" >> $GITHUB_ENV
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.14
         env:
           CIBW_ARCHS_LINUX: auto aarch64
-          CIBW_ARCHS_MACOS: "x86_64 arm64"
-          CIBW_TEST_SKIP: "*-macosx_arm64"
           # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
           # Skip PyPy wheels
           # Skip 32-bit Intel wheels
           CIBW_SKIP: "*musllinux* pp* *_i686"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: wheelhouse/*
+
+  mac-wheels-x86:
+    name: Build binary packages for macOS x86
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.14
+        env:
+          CIBW_ARCHS_MACOS: "x86_64"
+          CIBW_ENVIRONMENT_MACOS: F77=gfortran-11 F90=gfortran-11
+          CIBW_BUILD_VERBOSITY: "3"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          path: wheelhouse/*
+
+  mac-wheels-arm64:
+    name: Build binary packages for macOS arm64
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup gfortran for macOS arm64
+        if: matrix.os == 'macos-latest'
+        run: |
+          curl -L -O https://github.com/isuruf/gcc/releases/download/gcc-10-arm-20210728/gfortran-darwin-arm64.tar.gz
+          sudo mkdir -p /opt/
+          sudo cp "gfortran-darwin-arm64.tar.gz" /opt/gfortran-darwin-arm64.tar.gz
+          pushd /opt
+                sudo tar -xvf gfortran-darwin-arm64.tar.gz
+                sudo rm gfortran-darwin-arm64.tar.gz
+          popd
+          export FC_ARM64="$(find /opt/gfortran-darwin-arm64/bin -name "*-gfortran")"
+          libgfortran="$(find /opt/gfortran-darwin-arm64/lib -name libgfortran.dylib)"
+          libdir=$(dirname $libgfortran)
+          export FC_ARM64_LDFLAGS="-L$libdir -Wl,-rpath,$libdir"
+          export SDKROOT=$(xcrun -sdk macosx --show-sdk-path) 
+          export CIBW_ENVIRONMENT_MACOS="FC=$FC_ARM64 F90=$FC_ARM64 F77=$FC_ARM64 LDFLAGS=\" -arch arm64 $FC_ARM64_LDFLAGS\" CFLAGS=\" -arch arm64\" CXXFLAGS=\" -arch arm64\" CPPFLAGS=\" -arch arm64\" _PYTHON_HOST_PLATFORM=macosx-11.0-arm64 ARCHFLAGS=\" -arch arm64\" FCFLAGS=\" -arch arm64\" CROSS_COMPILING=1 host_alias=aarch64-apple-darwin20.0.0  MACOSX_DEPLOYMENT_TARGET=11.0 SDKROOT=$SDKROOT"
+          echo $CIBW_ENVIRONMENT_MACOS
+          echo "CIBW_ENVIRONMENT_MACOS=$CIBW_ENVIRONMENT_MACOS" >> $GITHUB_ENV
+
+      - name: Build wheels
+        uses: pypa/cibuildwheel@v2.14
+        env:
+          CIBW_ARCHS_MACOS: "arm64"
+          CIBW_TEST_SKIP: "*-macosx_arm64"
           CIBW_BUILD_VERBOSITY: "3"
 
       - uses: actions/upload-artifact@v3
@@ -67,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-    needs: [source, wheels]
+    needs: [source, linux-wheels, mac-wheels-x86, mac-wheels-arm64]
     if: github.event_name == 'release'
     steps:
       - uses: actions/download-artifact@v3
