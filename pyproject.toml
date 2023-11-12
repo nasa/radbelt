@@ -1,7 +1,8 @@
 [build-system]
-build-backend = 'setuptools.build_meta'
-requires = ["setuptools>=61",
-            "setuptools_scm[toml]>=6.2",
+build-backend = 'mesonpy'
+requires = ["meson>=0.63.0",
+            "meson-python",
+            "setuptools_scm>=6.2",
             "wheel",
             "numpy>=1.25"]
 
@@ -22,6 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Topic :: Scientific/Engineering :: Astronomy"
 ]
 license = { text = "NOSA" }
@@ -34,16 +36,6 @@ source = "https://github.com/nasa/radbelt"
 
 [project.optional-dependencies]
 test = ["pytest-doctestplus"]
-
-[tool.setuptools.packages]
-find = {}
-
-[tool.setuptools.package-data]
-"radbelt.extern.igrf" = ["*.dat"]
-"radbelt.extern.aep8" = ["*.asc"]
-
-[tool.setuptools_scm]
-write_to = "radbelt/_version.py"
 
 [tool.cibuildwheel]
 test-extras = ["test"]

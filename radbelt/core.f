@@ -1,5 +1,5 @@
 C
-C Copyright © 2021 United States Government as represented by the Administrator
+C Copyright (C) 2021 United States Government as represented by the Administrator
 C of the National Aeronautics and Space Administration. No copyright is claimed
 C in the United States under Title 17, U.S. Code. All Other Rights Reserved.
 C
