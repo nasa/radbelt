@@ -18,9 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: docker://python
-        with:
-          args: 'sh -c "pip install build && python -m build --sdist"'
+      - run: pip install build && python -m build --sdist
 
       - uses: actions/upload-artifact@v3
         with:
@@ -46,7 +44,7 @@ jobs:
         uses: pypa/cibuildwheel@v2.14
         env:
           CIBW_ARCHS_LINUX: auto aarch64
-          CIBW_ENVIRONMENT_MACOS: F77=gfortran-11 F90=gfortran-11
+          CIBW_ENVIRONMENT_MACOS: FC=gfortran-11
           # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
           # Skip PyPy wheels
           # Skip 32-bit Intel wheels
