@@ -28,7 +28,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Astronomy"
 ]
 license = { text = "NOSA" }
-requires-python = ">=3.9"
+requires-python = ">=3.9, <3.10"
 dependencies = ["astropy", "numpy>=1.19"]
 dynamic = [ "version" ]
 
