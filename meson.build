@@ -9,7 +9,7 @@ add_global_arguments(
   language : 'c'
 )
 
-add_languages('fortran')
+add_languages('fortran', native : false, required : true)
 
 is_windows = host_machine.system() == 'windows'
 if is_windows
