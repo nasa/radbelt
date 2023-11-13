@@ -16,6 +16,7 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "License :: OSI Approved",
     "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX",
     "Operating System :: POSIX :: Linux",
     "Operating System :: Unix",
@@ -40,3 +41,7 @@ test = ["pytest-doctestplus"]
 [tool.cibuildwheel]
 test-extras = ["test"]
 test-command = "pytest --pyargs radbelt --doctest-plus"
+
+[tool.cibuildwheel.windows]
+before-build = "pip install delvewheel"
+repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel}"
