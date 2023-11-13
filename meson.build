@@ -11,6 +11,11 @@ add_global_arguments(
 
 add_languages('fortran')
 
+is_windows = host_machine.system() == 'windows'
+if is_windows
+  add_project_link_arguments('-lquadmath', language : 'c')
+endif
+
 py_mod = import('python')
 py = py_mod.find_installation(pure: false)
 
