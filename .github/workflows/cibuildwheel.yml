@@ -47,13 +47,23 @@ jobs:
           choco install rtools -y --no-progress --force --version=4.0.0.20220206
           echo "c:\rtools40\ucrt64\bin;" >> $env:GITHUB_PATH
 
+      # Adapted from https://github.com/scipy/scipy/blob/main/tools/wheels/cibw_before_build_macos.sh
+      - name: Install GFortran for macOS arm64
+        if: runner.os == 'macOS'
+        run: |
+          curl -L https://github.com/fxcoudert/gfortran-for-macOS/releases/download/12.1-monterey/gfortran-ARM-12.1-Monterey.dmg -o gfortran.dmg
+          shasum -c <(echo 'e2e32f491303a00092921baebac7ffb7ae98de4ca82ebbe9e6a866dd8501acdf  gfortran.dmg')
+          hdiutil attach -mountpoint /Volumes/gfortran gfortran.dmg
+          sudo installer -pkg /Volumes/gfortran/gfortran.pkg -target /
+          type -p gfortran
+
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.16
         env:
           CIBW_BUILD_VERBOSITY: 1
           CIBW_ARCHS_LINUX: auto aarch64
           CIBW_ARCHS_WINDOWS: AMD64
-          CIBW_ARCHS_MACOS: auto arm64
+          CIBW_ARCHS_MACOS: arm64
           CIBW_ENVIRONMENT_MACOS: FC=gfortran-11
           # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
           # Skip PyPy wheels
