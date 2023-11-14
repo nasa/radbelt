@@ -53,7 +53,7 @@ jobs:
         run: |
           curl -L https://github.com/isuruf/gcc/releases/download/gcc-11.3.0-2/gfortran-darwin-x86_64-native.tar.gz -o gfortran.tar.gz
           shasum -c <(echo '981367dd0ad4335613e91bbee453d60b6669f5d7e976d18c7bdb7f1966f26ae4  gfortran.tar.gz')
-          sudo tar -xv -C /usr/local -f gfortran.tar.gz
+          sudo tar -xv -C /opt -f gfortran.tar.gz
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.16
@@ -61,7 +61,7 @@ jobs:
           CIBW_BUILD_VERBOSITY: 1
           CIBW_ARCHS_LINUX: auto aarch64
           CIBW_ARCHS_WINDOWS: AMD64
-          CIBW_ENVIRONMENT_MACOS: FC=/usr/local/bin/gfortran
+          CIBW_ENVIRONMENT_MACOS: FC=/opt/gfortran-darwin-x86_64-native/bin/gfortran
           CIBW_ARCHS_MACOS: arm64
           # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
           # Skip PyPy wheels
