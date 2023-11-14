@@ -51,11 +51,9 @@ jobs:
       - name: Install GFortran for macOS arm64
         if: runner.os == 'macOS'
         run: |
-          curl -L https://github.com/fxcoudert/gfortran-for-macOS/releases/download/12.1-monterey/gfortran-ARM-12.1-Monterey.dmg -o gfortran.dmg
-          shasum -c <(echo 'e2e32f491303a00092921baebac7ffb7ae98de4ca82ebbe9e6a866dd8501acdf  gfortran.dmg')
-          hdiutil attach -mountpoint /Volumes/gfortran gfortran.dmg
-          sudo installer -pkg /Volumes/gfortran/gfortran.pkg -target /
-          type -p gfortran
+          curl -L https://github.com/isuruf/gcc/releases/download/gcc-11.3.0-2/gfortran-darwin-x86_64-native.tar.gz -o gfortran.tar.gz
+          shasum -c <(echo '981367dd0ad4335613e91bbee453d60b6669f5d7e976d18c7bdb7f1966f26ae4  gfortran.tar.gz')
+          sudo tar -xv -C /usr/local -f gfortran.tar.gz
 
       - name: Build wheels
         uses: pypa/cibuildwheel@v2.16
