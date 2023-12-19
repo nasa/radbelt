@@ -20,7 +20,7 @@ jobs:
 
       - run: pip install build && python -m build --sdist
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: dist/*
 
@@ -58,7 +58,7 @@ jobs:
           # Skip 32-bit Intel wheels
           CIBW_SKIP: '*musllinux* pp* *_i686'
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           path: wheelhouse/*
 
