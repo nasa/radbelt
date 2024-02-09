@@ -30,6 +30,7 @@ C Adapted from
 C https://ccmc.gsfc.nasa.gov/pub/modelweb/radiation_belt/radbelt/fortran_code/radbelt.for
 
         SUBROUTINE AEP8(E, L, BB0, IMNAME, FLUX)
+            INTEGER     IERR
             REAL        L, BB0
             DIMENSION   MAP(20000), IHEAD(8), EE(1)
             CHARACTER*10  	NAME, MNAME(4)
@@ -47,7 +48,7 @@ C https://ccmc.gsfc.nasa.gov/pub/modelweb/radiation_belt/radbelt/fortran_code/ra
 1301	    FORMAT(1X,12I6)
         
 1822        CLOSE(IUAEAP)
-            IF (IER .NE. 0) STOP
+            IF (IERR .NE. 0) STOP
 
             EE(1) = E
             CALL TRARA1(IHEAD,MAP,L,BB0,E,FLUX,1)
