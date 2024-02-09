@@ -54,10 +54,8 @@ jobs:
           CIBW_ARCHS_LINUX: auto aarch64
           CIBW_ARCHS_WINDOWS: AMD64
           CIBW_ENVIRONMENT_MACOS: FC=gfortran-11
-          # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
-          # Skip PyPy wheels
           # Skip 32-bit Intel wheels
-          CIBW_SKIP: '*musllinux* pp* *_i686'
+          CIBW_SKIP: '*_i686'
 
       - uses: actions/upload-artifact@v4
         with:
