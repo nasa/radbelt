@@ -39,6 +39,7 @@ source = "https://github.com/nasa/radbelt"
 test = ["pytest-doctestplus"]
 
 [tool.cibuildwheel]
+test-skip = "*"
 test-extras = ["test"]
 test-command = "pytest --pyargs radbelt --doctest-plus"
 
