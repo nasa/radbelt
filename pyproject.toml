@@ -4,7 +4,7 @@ requires = ["meson>=0.63.0",
             "meson-python",
             "setuptools_scm>=6.2",
             "wheel",
-            "numpy>=2.0.0rc1"]
+            "numpy>=2.0.0"]
 
 [project]
 name = "radbelt"
