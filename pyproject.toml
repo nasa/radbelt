@@ -40,10 +40,26 @@ test = ["pytest-doctestplus"]
 [tool.cibuildwheel]
 test-extras = ["test"]
 test-command = "pytest --pyargs radbelt --doctest-plus"
+skip = [
+    # Skip musllinux wheels, which take a long time to build because Numpy must be built from source
+    "*musllinux*",
+    # Skip PyPy wheels
+    "pp*",
+    # Skip 32-bit Intel wheels
+    "*_i686"
+]
+
+[tool.cibuildwheel.linux]
+# Build Linux wheels for aarch64 under emulation.
+archs = ["auto", "aarch64"]
 
 [tool.cibuildwheel.windows]
+archs = ["amd64"]
 before-build = "pip install delvewheel"
 repair-wheel-command = "delvewheel repair -w {dest_dir} {wheel}"
+
+[tool.cibuildwheel.macos]
+environment.FC = "gfortran-14"
 
 [[tool.cibuildwheel.overrides]]
 # macOS arm64 wheels are built on GitHub on macOS 12; set deployment target accordingly
